@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun!</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffebee;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 20px;
+        }
+        
+        h1 {
+            color: #e91e63;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        p {
+            color: #333;
+            font-size: 1.5em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+            margin: 20px 0;
+        }
+        
+        .button:hover {
+            background-color: #c2185b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.6);
+        }
+        
+        .button:active {
+            transform: translateY(1px);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 5s linear infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .video-container {
+            display: none;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 10px;
+            border: 5px solid #e91e63;
+        }
+        
+        .cake {
+            font-size: 60px;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cake">🎂</div>
+        <h1>Selamat Ulang Tahun!</h1>
+        <p>Hai Aulia</p>
+        <p>Semoga di usia yang ke-18 ini,.</p>
+        <p>Kamu selalu sehat, makin cantik, baik, imut, lucu, pinter.</p>
+        <p>Klik tombol di bawah ini untuk kejutan spesial!</p>
+        
+        <button class="button" id="birthdayButton">18 Tahun</button>
+        
+        <div class="video-container" id="videoContainer">
+            <iframe src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Membuat confetti
+        function createConfetti() {
+            const colors = ['#e91e63', '#00bcd4', '#ffeb3b', '#4caf50', '#9c27b0'];
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = confetti.style.width;
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+        
+        // Membuat banyak confetti
+        function createConfettiBurst() {
+            for (let i = 0; i < 100; i++) {
+                setTimeout(createConfetti, i * 30);
+            }
+        }
+        
+        // Menangani klik tombol
+        document.getElementById('birthdayButton').addEventListener('click', function() {
+            createConfettiBurst();
+            
+            // Ganti dengan URL video YouTube yang Anda inginkan
+            const videoUrl = "https://www.youtube.com/embed/d1q7Lf2OeNw";
+            
+            const videoContainer = document.getElementById('videoContainer');
+            const iframe = videoContainer.querySelector('iframe');
+            iframe.src = videoUrl;
+            videoContainer.style.display = 'block';
+            
+            // Scroll ke video
+            videoContainer.scrollIntoView({ behavior: 'smooth' });
+            
+            // Animasi tombol
+            this.textContent = "🎉 Kejutan! 🎉";
+            this.style.backgroundColor = '#4caf50';
+        });
+        
+        // Membuat beberapa confetti saat halaman dimuat
+        setInterval(createConfetti, 300);
+    </script>
+</body>
+</html>
